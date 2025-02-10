@@ -1,1 +1,37 @@
+1. Control Access to Files
+  6 permissions, 3 special 3 regular
 
+
+
+                  1(_)file type 3(_)owning user 3(_)owning group 3(_)other    10 PERMISSION BITS 
+example:             d                  rwx        rwx            r-x
+
+drwxr-x---. 1 OR  drwxr-x---+ 2   --> the number at the end is associated with the link count associated with such directory
+
+GNU `ls' uses a `.' character to indicate a file with an SELinux
+     security context, but no other alternate access method.
+
+A file with any other combination of alternate access methods is
+     marked with a `+' character.
+
+
+*Note: You need "x" permissions to chyange into the directory and also you need "r" permission to do a directory listing "ls -l", if you want to create or delete a file inside a 'directory' you need "w" permission.
+
+To change the owning user --> chown
+To change the owning group --> chown : or chgrp
+To give permissions --> chmod                         *Note: being the owning user or a member of the owning group doesnt mean you have proviledges. Those are given by 10 permissions bit as root.
+
+Example Case:
+
+          chmod -R 770 /data                          *Note: I am applying permissions "recursively" meaning that apply the instruction to the parent and all its children(of the /data directory). All files inside the /data dir will be affected.
+
+Another example:
+          chmod a-x /data/regular_file                *Note: meaning that "-x" we are taking away all executable permissions to "a" all the subdirectories of the directory /data
+
+Another example:
+          chmod -R a=rwX /data                        *Note: this meaning that we are aplying rwX to only the /data dir but all the subdirectories only get rw permissions. 
+
+
+Another example:
+          Let's say the user "bobby" is the owning user of the dir called /data, and also is member of the group "pool". The permissions go as follow -->       d---rwx---. 2     this will affect bobby , becasue he had a match being the owning user 
+          the dir /data having No permissions whatsoever even though he is a member of a group which does have permissions it still affects him. He doesnt have any permissions over /data dir. 
