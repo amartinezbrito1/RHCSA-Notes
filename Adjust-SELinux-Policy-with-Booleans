@@ -1,0 +1,11 @@
+Commands
+
+semanage boolean -l | grep https_use  --> this one transacts against the selinux DB itself 
+
+getsebool -a | grep httpd_use
+
+Turn boolean on --> setsebool -P httod_use_nfs on 
+
+verify boolean status --> getsebool httod_use_nfs      or     semanage boolean -l | grep httpd_use_nfs
+
+semanage boolean -l -C --> to get local customatization
