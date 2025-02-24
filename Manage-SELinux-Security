@@ -1,0 +1,31 @@
+Enforcement modes
+DAC-discretionary(you do you) and MAC-mandatory(there are rules which must be followed)
+
+'Context' consists of 
+
+--- --- user:role:type:sensitivity:category
+
+Modes of operation 
+permissive <0> and enforcing <1>, is like you would use some mode in dev environments and other in prod when Rules Must befollowed
+
+/etc/selinux/config
+
+
+Commands in this chapter
+
+id -Z
+ls -lZ /etc/shadow
+semanage port -l | grep ssh 
+setenforce 0 or 1
+getenforce 
+grep ^[^#]  --> grabs all that are not commented out #  
+systemctl reboot 
+chcon -R -t --> change context
+
+
+mv command doesnt inherit 
+cp command does inherit 
+
+
+Note* after making a change to the config file or daemon you must systemctl reload reboot restart 
+
